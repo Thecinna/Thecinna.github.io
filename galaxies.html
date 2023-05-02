@@ -120,8 +120,8 @@
 									four images available for further analysis. A major issue that came up in this phase was signal to noise, with NGC 4395 being a low surface brightness galaxy,
 									by definition dimmer than sky background. This led to it being the most difficult to produce high quality images of, something that can be observed in the
 									remaining noise visible in some of the images seen here, but the results were nonetheless spectacular to look at and analyze. The second method of data
-									collection was far less exciting, though no less important due to the small number of data points I had available, which was using the Gaia and Vizier catalogues
-									to find stars with good quality magnitude information and to find magnitudes of my targets in filters that I hadn't collected.
+									collection was far less exciting, though no less important due to the small number of data points I had available, which was using the Simbad and Vizier catalogues
+									to find stars within the captured fields with good quality magnitude information and to find magnitudes of my target galaxies in filters that I hadn't collected.
 								</p>
 								<a href="#" class="image fit"><img src="fitting.png" alt="" /></a>
                                 <p style="text-align: right;">In-progress screenshot of identifying and accounting for the flux of Milky Way stars on the face of NGC 4395</p>
@@ -137,7 +137,8 @@
                                     the fits of the models, then used both the dynesty and emcee packages to adjust model perameters each time. Of these two, emcee with its Monte Carlo approach consistently performed
                                     better than the former, but it would be remiss to not acknowledge that both were used. A particular challenge faced here and the reason for acquiring catalogue data for both
                                     targets was that in doing this, three data points, plus the known value of the galaxies' redshifts, were being used to attempt to fit upwards of five terms. Indeed, as the
-                                    effort matured, six terms were reduced to four.
+                                    effort matured, six terms were reduced to four to provide a semblance of better fit. Further, it was necessary to incorporate ugriz data from the Simbad catalogue, raising the total number of data points to
+					nine, plus the redshift.
 								</p>
                                 <a href="#" class="image fit"><img src="2976.png" alt="" /></a>
                                 <p style="text-align: right;">Colored B, V, and I composite of NGC 2976, with bandpasses fitted to blue, green, and red, respectively.</p>
