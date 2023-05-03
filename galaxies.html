@@ -109,30 +109,30 @@
 								</p>
 								<p style="text-align: left;">What I came away from McDonald observatory with was a collection of images within B, V, and I Johnson-Cousins' filters and an H-alpha filter for two
 									reasonably nearby, highly unusual dwarf galaxies, NGC 2976 and NGC 4395. Located approximately 3.5 and 4.4Mpc away, respectively, these two very distinct galaxies
-									presented an opportunity to test the amount of information that could be gathered using what information I had and what I could mine from catalogues.
+									presented an opportunity to test how much could be extrapolated from the information I had gathered.
 									Though not ideal subjects nor an ideal project to answer a particular research question, it was a deeply productive endeavor that ended up equipping
 									me with a new suite of tools that going forward will continue to be refined and notably don't necessarily require additional telescope resources to
 									carry out. Further, though it may not have yielded particularly high quality SED models, it did indeed produce them.
 								</p>
-								<p style="text-align: left;">Data collection consisted of two methods. The first taking three images of each galaxy with exposure times of three minutes for each of the four filters, with this process
-                                    being aided by my professor Dr. Hartigan of Rice University. 
+								<p style="text-align: left;">Data collection consisted of two methods. The first consisted of taking three images of each galaxy with exposure times of three minutes for each of the four filters, with this process
+                                    being aided by my professor Dr. Hartigan of Rice University in the evening of 23 March, 2023. 
 									This data was then reduced using IRAF and several of its packages including zerocombine, flatcombine, ccdproc, imalign, and imcombine. This resulted in a set of
 									four images available for further analysis. A major issue that came up in this phase was signal to noise, with NGC 4395 being a low surface brightness galaxy,
-									by definition dimmer than sky background. This led to it being the most difficult to produce high quality images of, something that can be observed in the
+									by definition dimmer than sky background. This led to it being difficult to produce high quality images of, something that can be observed in the
 									remaining noise visible in some of the images seen here, but the results were nonetheless spectacular to look at and analyze. The second method of data
 									collection was far less exciting, though no less important due to the small number of data points I had available, which was using the Simbad and Vizier catalogues
-									to find stars within the captured fields with good quality magnitude information and to find magnitudes of my target galaxies in filters that I hadn't collected.
+									to find calibration stars within the captured fields and to find magnitudes of my target galaxies in filters that I hadn't collected.
 								</p>
 								<a href="#" class="image fit"><img src="fitting.png" alt="" /></a>
                                 <p style="text-align: right;">In-progress screenshot of identifying and accounting for the flux of Milky Way stars on the face of NGC 4395</p>
                                 <p style="text-align: left;">Once reduced, the imaging data was then transferred to Python due to difficulties experienced while using IRAF's photcal package. In this environment, SEP was used to identify
-                                    objects, including a number of stars within our galaxy that happen to occupy the plane of NGC 4395, then these objects were passed to the photutils and astropy library to
+                                    objects, including a number of stars within our galaxy that happen to occupy the plane of NGC 4395. These objects were then passed to the photutils and astropy library to
                                     calculate flux ratios and ultimately find the apparent magnitudes of the galaxies. From here the difficulty curve of the analysis increased greatly, as it was necessarily
                                     to learn at least some of the Fortran programming language and manage several wrappers and environments to operate a program known as FSPS. The primary use and reason for the
                                     name FSPS is flexible stellar population synthesis, wherein inputted data is synthesized into a modelled population. This synthesized model could then be analyzed for the quality of
-                                    fit to the inputted data.
+                                    fit to the inputted data by comparing what is analogous to a simulated spectra of the galaxy to the magnitudes that were observed. 
 								</p>
-                                <p style="text-align: left;">Initial fits with this process, unless exceedingly lucky, are not likely to produce good fits and thus potentially meaningful results, however.
+                                <p style="text-align: left;">Initial attempts with this process, unless exceedingly lucky, are not likely to produce good fits and thus potentially meaningful results, however.
                                     This necessitates iteration and tweaking of the models. This role was mediated by another package named astro-Prospector, which iteratively compared
                                     the fits of the models, then used both the dynesty and emcee packages to adjust model perameters each time. Of these two, emcee with its Monte Carlo approach consistently performed
                                     better than the former, but it would be remiss to not acknowledge that both were used. A particular challenge faced here and the reason for acquiring catalogue data for both
