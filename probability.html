@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Probability</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Bayesian and frequentist approaches to probability</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+						<!-- <li><a href="index.html">Home</a></li>
+						<li><a href="left-sidebar.html">Left Sidebar</a></li>
+						<li><a href="right-sidebar.html">Right Sidebar</a></li>
+						<li><a href="no-sidebar.html">No Sidebar</a></li>
+						<li><a href="#" class="button special">Sign Up</a></li>
+						-->
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>R</h2>
+                    <p>General principles, Bayesian vs Frequentist interpretations</p>
+				</header>
+				<div class="container">
+                    <!--
+					<div class="row">
+						<div class="6u">
+                            -->
+							<section class="special">
+                                <h3>General probability</h3>
+                                <p style="text-align: left;">
+                                    For many systems, it's difficult or impossible to predict the full suite of behaviors it may put out. This can be because of the system being
+                                    fundementally non-analytic, simply too complicated and affected by too many factors to reasonably model, or because they obey some (at least
+                                    perceived) true randomness. For these systems, it's often useful to resort to an understanding that describes outcomes in their likelihood or 
+                                    <i>probability</i>. Examples of these are numerous in astronomy, whether it be in the distribution of photons on a CCD, the characteristics of
+                                    stars (position, motion, metallicity, age, etc.), or the properties of other objects and classes of astronomical objects. 
+                                </p>
+                                <p style="text-align: left;">
+                                    As a general rule, the sum of all probabilities for a system, whether arising from a discrete or continuous basis, must sum to one (the continuous
+                                    basis requiring integration). That is, the
+                                    system must exhibit <i>some</i> behavior. A convenient way to think of this is how when a dice is rolled, barring situations where rules invalidate
+                                    a roll, it must yield the value on one of its faces or another. Alternatively, a continuous example might be that of the position of a particle in
+                                    a simple harmonic oscillator. The particle must be somewhere, even if certain positions are more likely than others.
+                                </p>
+                                <h4>Independence of results</h4>
+								<p style="text-align: left;">
+                                    One thing that can either be highly intuitive or deeply cryptic depending on one's disposition is that most statistical methods assume that the
+                                    outcome for multiple evaluations of a phenomena (e.g. rolls of the dice) are independent of each other. While there are many interesting results of
+                                    this property, among the most important is to understand that for truly random processes the odds never become "hot". When one rolls a <i>fair</i>
+                                    six-sided die, the odds of getting a six are always 1/6. A related phenomena is that your odds of rolling a six do not double if you roll two die.
+                                    Instead, it's a bit better than a quarter, instead of one third (see: binomial distributions for details). This is also why one's chances of winning
+                                    the lottery don't scale linearly as one buys more tickets.
+								</p>
+                                <h4>Frequentist approach</h4>
+								<p style="text-align: left;">
+                                    This edges near the general thinking of the Frequentist approach. Though there exists a longstanding debate as to if it or the Bayesian approach is
+                                    more appropriate and there may well be a case for it depending on the sort of question or system one is attempting to understand, the Frequentist take
+                                    is often best described as the "classic" perspective on statistics despite Bayesian statistics themselves not at all being new (c.1763). To the
+                                    frequentist, flipping a fair coin a sufficiently large number of times will tend all results towards being more or less evenly balanced. That is, you'll
+                                    end up with about as many heads as tails, with the even-ness of the outcome set getting better as you flip the coin more times. This generally assumes
+                                    that the probability distribution of a system is well defined and, if it changes over the course of experiments, changes in predictable ways. One concern
+                                    with this is that if we know additional information about a system that might nudge the distribution of expected outcomes, the most rigid of Frequentist
+                                    approaches would ignore this in favor of standing by the codified probability distribution. 
+								</p>
+                                <h4>Bayesian approach</h4>
+								<p style="text-align: left;">
+                                    As a counter to this, Bayesian statistics relies on the principle that we often do have at least some level of knowledge about the expected outcome of a
+                                    probabilitistic phenomena, especially when we're repeating many experiments and feel it may be useful to "update" our probability distribution run-to-run.
+                                    This takes the form of the probability of outcome A, given some known outcome B, is the probability of B given A, multiplied by the initial probability of A,
+                                    finally divided by the probability of having gotten B. While convoluted and the many phenomena that can spring from this warrant their own exploration, it can
+                                    be easier to think of this as the convolution of an old probability distribution and a new one that will skew the distribution in various ways depending on the
+                                    individual probability distributions. One example of this that I've been given is to think in terms of updating odds after a sports game. While the team remains
+                                    the same (give or take), we can use the results of each performance to skew what we model as the probability of winning the next game instead of relying on
+                                    whatever model we developed at the beginning of a trial or season. 
+								</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
