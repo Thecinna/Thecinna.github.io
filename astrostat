@@ -1,0 +1,78 @@
+
+<html>
+	<head>
+		<title>Astrostat</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">A small (mostly personal) guide to statistical techniques in astronomy</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Astrostats</h2>
+                    <p>Primarily drawn from Modern Statistical Methods for Astronomy by Eric Feigelson and G. Babu</p>
+				</header>
+				<div class="container">
+							<section class="special">
+								<h3>General summary</h3>
+								<p style="text-align: left;">
+                                    While I neither can, nor necessarily should, go into great detail as to the many statistical problems that appear and are require wrangling in order to be effective within the fields
+                                    of modern physics and astronomy, I have created this page to serve as a handy (mostly personal) reference so that certain topics and problems explored in great detail in Feigelson and Babu's 
+                                    <i>Modern Statistical Methods for Astronomy: With R Applications</i> may be quickly indexed and personally preferred approaches may be noted. It should be noted that, for its price, the text serves as
+                                    an excellent reference in its own right, though readers may be better served by more introductory works before stepping into it, as the authors, though certainly capable, created the work as a broad
+                                    synopsis of methods and it largely assumes the reader already has at least some familiarity with statistical methods and theory.
+										<!-- One -->
+				                <header class="major">
+				                </header>
+                                <div class="container">
+                                            <section class="special box">
+                                                <i class="icon fa-area-chart major"></i>
+                                                <h3>Topic breakdown</h3>
+                                                <p>Each section covers a particular topic, generally mirroring the text</p>
+                                                <nav id="nav">
+                                                    <ul>
+                                                        <li><a href="personal_R.html" class="button special">Notes on R</a></li>
+                                                        <li><a href="probability.html" class="button special">Probability, Bayesian vs Frequentist</a></li>
+                                                        <li><a href="nonparametrics.html" class="button special">Nonparametric methods</a></li>
+                                                        <li><a href="smoothing.html" class="button special">Data smoothing</a></li>
+                                                        <li><a href="stat_regression.html" class="button special">Regression</a></li>
+                                                        <li><a href="stat_multivar.html" class="button special">Multivariate analysis</a></li>
+                                                        <li><a href="stat_cluster.html" class="button special">Clustering and classification</a></li>
+                                                        <li><a href="stat_time.html" class="button special">Time series</a></li>
+                                                        <li><a href="stat_spatial.html" class="button special">Spatial point processes</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </section>
+                                </div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
