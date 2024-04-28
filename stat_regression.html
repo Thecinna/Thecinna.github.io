@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>The R coding language</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Personal notes for when working in R</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Regression</h2>
+                    <p>Finding and fitting trends in data</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>Motivation</h3>
+                                <p style="text-align: left;">
+                                    When evaluating data, especially multivariate data or data in a particular sequence, it's often the case that we suspect or know there to be an 
+                                    underlying 
+                                    relation between 
+                                    either where in a data sequence the point lies or between a point's value in one parameter and that in another. For these instances, 
+                                    we can often attempt to fit a function to the data, whether that be a complex, nonparametric, multivariate mess or simply drawing a line 
+                                    that minimizes the sum of the distances between itself and each point. To this end, it is necessary to utilize a variety of statistical tools 
+                                    both to create and to interpret these regressions of our data, though for the former we are near-invariably looking to minimize some sort of 
+                                    distance in one sort of space or another. 
+                                </p>
+                                <h3>Minimizing error</h3>
+                                <p style="text-align: left;">
+                                    While the concept is simple, exactly how to manage quantifying the error for a fit, taking the distance between what the value would be if it exactly 
+                                    fit the function we were using at a particular point in the space versus the point that was actually measured, can be more involved. For most well-behaved 
+                                    data sets, standard error and least-squares are generally sufficient, but this is not always the case. In particular, these methods can be vulnerable to 
+                                    the influence of outlier wherein the majority of datapoints may fit well to a particular function while others differ from it in some sort of extrema. The 
+                                    problem arises when whatever means we're using to fit our function simply can't tell that the high error that it's getting for the "right" line is due to 
+                                    one or two points that may be extaneous to the question we want to answer or erroneous in their placement. 
+                                </p>
+                                <p style="text-align: left;">
+                                    Dealing with outliers falls under its own entire field of statistics that this guide isn't fit to explore, but capable tools have been developed for 
+                                    the sake of regression in particular are worth mentioning. In general, these tend to deal with M-estimators, which rely on finding median rather than 
+                                    mean due to the latter's vulnerability to outliers. From there, one can form arguments on elminating datapoints beyond a particular distance, which would 
+                                    include the offending datapoints. Alternatives include the Huber estimator, Tukey's bisquare (biweight) function, and the least trimmed square. A final 
+                                    approach that was enjoyed both by myself and a professor was the Thiel-Sen median slope line, which operated on the principle that the median of the slopes 
+                                    of lines connecting all datapoints was itself a reasonable approximation of that of the dataset.
+                                </p>
+                                <p style="text-align: left;">
+                                    Once regression lines (or planes, surfaces, etc.) are found in the data, be mindful of the units of any lines that've been created, though there are 
+                                    other means of evaluating how good a regression has been produced. Notably, cross-validation and bootstrapping. These can be useful either for detecting the 
+                                    validity of a regression when we have new data (think training vs testing data) or detecting the sensitivity of the regression model to particular datapoints. 
+                                    While the former is directly applicable to determining if a model is useful for prediction, the latter has characteristics of tending the same anxieties as 
+                                    outlier points. 
+                                </p>
+                                <h3>Useful packages</h3>
+                                <p style="text-align: left;">
+                                    While writing one's own least-squares function might not be terribly difficult, extant libraries would make it redundant. 
+                                </p>
+                                <li>minpack.lm: Supports a wide range of regressive methods both bounded and unbounded</li>
+                                <li>dnorm(), dunif(), dexp(): serve as useful function to create normal, uniform, and exponential distributions for fitting</li>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
