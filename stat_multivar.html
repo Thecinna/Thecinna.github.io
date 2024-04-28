@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Multivariate and multidimensional datasets</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Personal notes for when working in R </a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Multivariate and multidimensional data</h2>
+                    <p>Handling complex, related data sets</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>Motivation</h3>
+                                <p style="text-align: left;">
+                                    There exist many paths to get to multivariate analysis and elements of it have been touched on in other sections of these notes. Still, there 
+                                    exists enough material therein to devote at least some space to the peculiarities of multivariate data on its own. Consider that datasets that 
+                                    appear to be only monovariate or bivariate may well be multivariate, whether due to there being significance to the sequence of data points or                                      or bivariate measurements 
+                                    because separate measurement sequences can be combined to provide a multivariate window into the underlying phenomena. That aside, also consider 
+                                    that many problems are themselves inherently multivariate and thus require treatment as such. 
+                                </p>
+                                <h4>Peculiarities of multivariate data</h4>
+                                <p style="text-align: left;">
+                                    While it may be tempting (and at times appropriate or at least expedient) to simply treat multivariate data as a collection of monovariate data sequences when 
+                                    evaluating values such as means, distances, and distributions it is not necessarily the case. Various methods exist for distance, such as euclidean 
+                                    distance, minkowski metrics, manhattan distance, and various forms of matrices such as proximity, distance, and dissimilation matrix. It can be important 
+                                    to be certain of units for each of the variables when doing this, thinking how a dataset consisting of intensity and spatial location can grant much 
+                                    larger distances if one measures distance in centimeters rather than parsecs. Dealing with distributions in multivariate space can similarly be problematic, 
+                                    with units being a recurring issue and datatypes at times featuring distinct distributions. Some extant methods exist to deal with this such as 
+                                    multivariate normal distibutions and Wishart distribution, but it's best to remain cogniscent of what the data actually is when attempting to extract this 
+                                    type of data. 
+                                </p>
+                                <h4>PCA and ICA</h4>
+                                <p style="text-align: left;">
+                                    Once one has a sufficient understanding of the distance involved in a dataset, it can pay to simplify it as much as possible while retaining as much information 
+                                    as possible. While there's generally no way to retain the entirety of information when one starts discarding elements of a set, it is not unusual to find that 
+                                    most of the variance and thus the predicting, clustering, and resolving power of a dataset to primarily be driven by a subset of all measurement axes. This is 
+                                    firstly the place of PCA or Pinciple Component Analysis, which (though actually a fairly fascinating linear algebra, like ICA) can be thought of as redrawing our 
+                                    axes to maximize spread along them. This leads to a situation where our new axes are now combinations of our original ones, which might yield problems if we're 
+                                    required to draw physical meaning from them in some cases, but in others may actually be the entire goal or simply be irrelevant if all we're aiming to do is 
+                                    examine clustering. If we instead have measurements that are instead the product of different admixtures of <i>independent</i> phenomena, such as sound files that all 
+                                    hear the same scene with different levels of various "noise" or the brightness profiles of galaxies, we can use independent Component Analysis, which again uses 
+                                    some excellent linear algebra to find what those independent components are. The fundemental differences between these two, despite the similarity in their name, is 
+                                    that PCA primarily searches for axes of maximal distance and typically returns new mixed axes from our original dataspace and allow us to truncate our data set if 
+                                    the differences we want to observe are sufficiently governed by only a few of these axes (scree plots can help determine this) while ICA is most useful for decomposing 
+                                    a dataset that is a function of multiple independent elements into those elements.
+                                </p>
+                                <h4>Related tools in R</h4>
+                                <li>TuneR: Excellent package for analyzing sound files in particular</li>
+                                <li>ica: Contains various ICA, PCA algorithms</li>
+                                <li>fastICA: Excellent package that quickly (as a blackbox) handles ICA</li>
+                                <li>audio: Adds ability to </li>
+                                <li>crossprod(): generic R command for crossproducts</li>
+                                <li>prcomp(): Useful for finding PCA</li>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
