@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>(Statistical) censoring and truncation</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Handling missing datapoints</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Censoring and truncation in datasets</h2>
+                    <p>When a point either has no data or we have no points where we know they ought be</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>Censoring vs truncation</h3>
+                                <p style="text-align: left;">
+                                    When dealing with datasets that are flawed due to missing values, the methods can differ depending on if the data is right or left censored or 
+                                    if the data is truncated. Right censoring is when all we have is a lower-limit on a value what is known to exceed it <i>i.e.</i>: a person who 
+                                    is 60 will live be at least 60 years old, but we don't necessarily know if they'll be 61, 80, 140, etc. when they die. Left censoring is the 
+                                    opposite, there exists some upper limit on a value, but we can't meaningfully constrain the lower end of it. Note that these can be thought of 
+                                    as uncertainties that are bounded on only one end and that the ideas and techniques here are largely the product of the actuary profession. 
+                                    Truncation however is the phenomena of knowing (or simply suspecting) that there exists some factor that truncates the data such that we don't 
+                                    have points for a given region that we know (or again, suspect) to contain points we failed to detect. The quintessential example of this in 
+                                    astronomy is the relationship between star or galaxy detection and distance; for longer distances, it becomes increasingly difficult to detect 
+                                    dimmer stars, until eventually we can detect no stars, galaxies, AGN, or whatever it is due to the laws governing observed magnitude. Note that 
+                                    truncated datapoints can become censored datapoints if we were to detect one element of the point, but fail to detect the others e.g.: we cannot see 
+                                    a galaxy in the visual range, but its AGN is detectable via x-ray
+                                </p>
+                                <h3>Managing censoring</h3>
+                                <p style="text-align: left;">
+                                    As mentioned, this field is largely a product of the work of actuaries and insurance schemes, leaving terminology and systems somewhat unwieldy, 
+                                    but very refined. In general, one can either back out the probability of survival (read: success at something, be mindful when using these methods) 
+                                    from a censored dataset by defining or fitting a survival function, which can give us a better sense of how a total population is distributed. It's 
+                                    important, however, to keep in mind how the function is behaving, with most relying on an assumption that censorship is random for points along a 
+                                    given axis; that is, it may be more likely you'll die as you get older, but whether or not you die at a given age is random and not driven by 
+                                    unseen functions. They also generally assume the distribution of censored points is related to the distribution of uncensored points, which may or 
+                                    may not ultimately be correct. Because of these, it may sometimes be more appopriate to turn to nonparametric methods (covered elsewhere), as these 
+                                    will avoid these sorts of assumptions, though they'll also generally provide less information.
+                                </p>
+                                <h3>Managing truncation</h3>
+                                <p style="text-align: left;">
+                                    Truncation is as a rule a problematic thing, as, while with censoring we can with confidence assert that our points must lay <i>somewhere</i> in the 
+                                    measurement space, for truncation we're relying purely upon our own certainty (and biases) to assert that there must exist points. This isn't to say 
+                                    that truncation is best avoided, but that one must be very careful in how they construct their arguments when truncation is involved and with the 
+                                    assumptions that they're making. Like censorship, truncation can have left and right modes and one can construct survival functions (likelihood of 
+                                    detection) for their dataset if need be. Similarly, one can rely on parametric or non-parametric methods for addressing truncation. For parametric, 
+                                    one needs to have a distribution in mind that one already has a good reason to believe is the appopriate distribution of all points, including the 
+                                    ones that weren't detected, the process is then as simple as fitting the distribution to the data, complicated now relying only on the measured datapoints to get 
+                                    there. For non-parametric methods, one draws near the Kaplan-Meier method that's more appropriate for censored data with the Linden-Bell-Woodroofe method, 
+                                    which fits a maximum likelihood to monovariate data and captures a statistically rigorous guess as to the distribution of non-detections, but relies on 
+                                    the idea that the data is distributed in a way that's consistent with the detected points. Efron-Petrosian extends this to multivariate data, but I have 
+                                    no experience with it. 
+                                </p>   
+                                <h3>Helpful packages, libraries</h3>
+                                <li>NADA library: Contains useful survival function analysis</li>
+                                <li>survival library: Can create survival distributions to fit</li>
+                                <li>Surv(): Creates a survival function for censored data, requiring (data,survival) format</li>
+                                <li>survfit(): Creates a fitted survival function for plotting</li>
+                                <li>plot(): Yes, this is a default library, but one can plot the survfit via (survfit_object, confidence, etc.)</li>
+                                <li>coxph(): Performs cox regression for censored data, allowing us to figure out the influence of different factors on survival</li>
+                                <li>survdiff(): Creates plottable comparison of survival functions to find differences based on categorical data</li>
+                                <li>DTDA library: Contains LBW and efron.petrosian methods for handling truncated data</li>
+                                <li>efron.petrosian(): Allows the creation of plottable CDF and survival functions for truncated data</li>
+
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
