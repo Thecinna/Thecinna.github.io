@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Clustering and classification</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Fancy ways to sift data into boxes</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Clustering and classification</h2>
+                    <p>Various forms of supervised and unsupervised clustering and classification</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>General premise</h3>
+                                <p style="text-align: left;">
+                                    While perhaps not necessary, it is generally the case that clustering will be done in multivariate data sets, so be sure to check that 
+                                    to make sense of some ideas here. In particular, clustering works under the premise that while our datapoints exist under some sort of 
+                                    distribution in the space of our data (perhaps physical space as well, but one could also develop a "distance" of blueness, wealth, etc.) 
+                                    and within the distribution we may know or simply suspect that there exist one or more significant "clumps", possibly with a background 
+                                    of "noise" values. In clustering and classification, we're generally interested in finding and identifying these clumps or seeing which 
+                                    clump a new datapoint.
+                                </p>
+                                <h3>Supervised vs unsupervised; bias</h3>
+                                <p style="text-align: left;">
+                                    Though far more complicated than simply a matter of choosing a method that produces a particular form of result, such is often the primary 
+                                    concern when choosing between supervised and unsupervised methods in classification. Specifically, a supervised method is one that is 
+                                    somehow preconditioned by training or peramaters to yield a particular sort of result. It could be that we train our method on objects of 
+                                    class A, B, and C and then ask it to classify new objects or it could be that we tell our algorithm, library, etc. that we want it to sort 
+                                    some pile of data into exactly four group (note that the latter may or may not be considered supervised depending on who is using the term). 
+                                </p>
+                                <p style="text-align: left;">
+                                    The central issue to this dichotomy is one of bias and the appropriate answer comes down to what sort of question one is attempting to answer. 
+                                    A method that was trained on a particular sort of data will of course be awful at handling data that doesn't align with the types it was 
+                                    originally trained on or provided with, but, problematically, will generally always sort the new data into one of the boxes it was trained to sort things 
+                                    into. The same follows for methods that aren't trained, but likewise always sort into a pre-selected number of categories, with it sometimes 
+                                    being best that everything fits into one of those categories and sometimes being a bad idea to attempt to force such a thing.
+                                </p>
+                                <h3>Methods</h3>
+                                <p style="text-align: left;">
+                                    Much like when handling multivariate data in general (go look at that) a key metric of interest when doing classification is "distance", 
+                                    whether that distance is in euclidean space or in some other variety of properties. The upshot of this is that most of the difference between 
+                                    different methods of clustering are, after one gets away from training and pre-determining valid categories or their number, is the evaluation 
+                                    of distance. Complete-linkage dendrograms for instance are an unsupervised method that will sort all points by hierarchically (from the bottom up) 
+                                    clustering based on minimal distance to provide a result that looks much like a taxonomic tree where one can retroactively pick the number of 
+                                    clusters to report by selecting a threshhold in terms of distance (termed height) or pre-emptively select a cluster count to overlay. 
+                                    One can alternatively utilize the same general method, but using average or single distance metric for defining the clusters, but I've found 
+                                    complete and average to be the only ones worth using. Another method to consider would be K-means or DIANA, though these are more algorithms to 
+                                    apply to the same general concept. Be wary of "nesting" wherein clusters "wrap round" each other along one or more axes, as these methods tend to 
+                                    struggle on that front.
+                                </p>
+                                <p style="text-align: left;">
+                                    DBSCAN is my personal favorite method to use for complex data where there exists a known backhground or noise, particularly if there's a clear 
+                                    distinction between the density of the clusters I'm looking for and that noise. Its general concept is that of taking each point and counting 
+                                    the number of points that appear within an annulus of perameter <i>r</i>(or whatever one calls it) and comparing that to a pre-defined perameter 
+                                    (often k, but packages will vary). If the number of points N > k, then it becomes a "seed" point and all "seed" points in a contiguous chain are 
+                                    added to a cluster before non-seeds are ultimately joined to the cluster they lay nearest if and only if they're within an extant seed's annulus. 
+                                    This method easily handles diffuse background and oddly shaped clusters, though one will often need to play with K and R to get appropriate results, 
+                                    which leaves room for bias where it's quite easy to select the result one wants for better or worse.
+                                </p>
+                                <h3>Training</h3>
+                                <p style="text-align: left;">
+                                    Using the magic of linear algebra, it's possible to train the values of a matrix to produce appropriate classification of data using K-nn and LDA 
+                                    methods, which as mentioned are primarily distinctions in how to construct and evaluate distance. These methods near-invariably produce 
+                                    misclassification, but can with sufficiently large training sets become quite capable and are still far faster than applying humans to do the same 
+                                    sort of work. As an aside, one can train numerous models on random subsets of the parameters and training data, resulting in several "trees" that classify 
+                                    the data. This method (random forest, as an extension of classification trees) can be extremely effective at handling the general issue of over-training 
+                                    for training data, but I digress. Of the two aforementioned methods of classification, LDA is expected to produce the better results, though I have 
+                                    found the opposite on more than one occasion, which primarily serves to point to the importance of trying all the tools available to you if not 
+                                    computationally constrained. 
+                                </p>
+                                <h3>Packages, libraries, R notes:</h3>
+                                <li>stats library: (Almost) exactly what it says on the tin, contains hclust</li>
+                                <li>hclust(): contains a variety of methods of performing hierarchical clustering, dendrogram creation [plot(hclust_object)]</li>
+                                <li>cutree(): "cuts" the tree produced by hclust to a particular height to produce k clusters. Useful for varying cluster count in plots</li>
+                                <li>fpc library: Contains a handy DBSCAN implimentation in R</li>
+                                <li>dbscan(): Performs one of my favorite clustering methods, particularly good at separating background</li>
+                                <li>MASS library: Contains LDA algorithm for training on data for classification</li>
+                                <li>lda(): Trains using a set of data and a known classification for each line [assumes dataframe-like]</li>
+                                <li>predict(): Used widely, but can be used to predict outcomes in a variety of ways. Here, predict(lda_object, data) will produce the lda's predicted class</li>
+                                <li>class library: contains k-nn clustering algorithm</li>
+                                <li>knn(): Behaves much like lda above, but for the k-nn algorithm. Must provide K, L.</li>
+                                
+
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
