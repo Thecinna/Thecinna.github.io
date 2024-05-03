@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Spatial point processes (not just fancy multivar)</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Handling missing datapoints</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Spatial point processes</h2>
+                    <p>(generally multivariate) Processes that vary in space</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>Stationarity and isotropy</h3>
+                                <p style="text-align: left;">
+                                    While there are many problems that can be approached as spatial point processes, the way of dealing with these tends to differ little from how 
+                                    one would deal with clustering, multivariate data, or time series analysis (adapted to spatial rather than temporal units). Potentially central, 
+                                    however, are the concepts of stationarity and isotropy, which can become the prime problems when attempting to apply the general techniques 
+                                    utilized in spatial analysis due to their often being assumed. Stationarity is the notion that the data is invariant under translation, which, 
+                                    at first glance, seems to mean that we must have homogenous data that's the same everywhere, but isn't necessarily the case. Instead, we're mostly 
+                                    concerned that a datapoint's value isn't dependented on a particular origin and is in general independent of its coordinate location. This goes 
+                                    hand in hand with isotropy, which is the same concept, but applied to rotations and the desired trait that the data doesn't vary in a distinct way 
+                                    if one moves away from a point in one direction versus another. 
+                                </p>
+                                <p style="text-align: left;">
+                                    There certainly do exist various techniques for determining if data is both stationary and isotropic, but the simplest is simply looking at the data. In 
+                                    general, stationary and isotropic data will lack structure aside from globular, rounded features. Particularly suspicious would be anything resembling 
+                                    a slope in the data from one edge to the other, evenly spaced periodic phenomena, or extended lines or bars. One might do some sort of density kernel 
+                                    to approximate the general "shape" of data, simply plot it in some 3D (or higher space) way, or finally, if one really needs to produce a statistically 
+                                    rigorous value, the nearest-neighbor distribution can be calculated and compared with complete spatial randomness, with the ideal data being spatially 
+                                    random.
+                                </p>
+                                <h3>The variogram</h3>
+                                <p style="text-align: left;">
+                                    Though almost covered as a subtopic of kriging, the variogram or semivariogram (there are many varieties) provides a wealth of information about how 
+                                    data behaves, with the only reason that it isn't in the above section for detecting nonstationarity or anisotropy being that it doesn't provide a 
+                                    method of differentiating the two, though it can be used to detect if either exist. Plotting different forms of the variance between points for 
+                                    increasing distance, weighting, and distance depending on the form, the classic semivariogram and its features as the cornerstone of kriging methods. 
+                                    In particular, a good dataset for kriging will feature a semivariogram with a well-defined y intercept (termed a nugget) that characterizes the minimum 
+                                    variance between points and implies randomness (thus nonstationarity, anisotropy) in the data. Similarly, the semivariogram should lead up to a consistent 
+                                    height in y, implying sufficiently distant points tell us no more or less than yet further points, again reinforcing the randomness argument. This y value 
+                                    is termed the "sill" and the distance in x, itself a measure of spatial distance, is the range.  These all by themselves already can inform us a great 
+                                    deal about what the properties of the data are and may be enough to answer our questions if we don't actively need an interpolated map of the data. 
+                                </p>
+                                
+                                <h3>Kriging and interpolation</h3>
+                                <p style="text-align: left;">
+                                    Again, there exist a variety of topics in spatial point processes, many of which have to do with clustering and correlation, but interpolation and the 
+                                    (originally) geostatistical technique known as kriging are particular to spatial processes and deserve their own aside. For any dataset in space, there 
+                                    is likely a case to be made for the idea that more information would be useful so that we can better understand what's going on between the points that 
+                                    are measured. This could in turn quickly become an exercise in futility as we endeavor just to get that extra little bit of information that we need to 
+                                    confidently assert whatever it is that we're after, rather than accepting that the points we have can inform us what's going on between them with a 
+                                    reasonable degree of uncertainty. If we know the data fits a particular distribution (that we either know beforehand or attain via regression) then we 
+                                    can simply use that, though be mindful of the blackbox nature of regression. Alternatively, if we know the data is spatially random per the techniques 
+                                    outlined above (particularly the semivariogram), it's possible to use the kriging method to rigorously interpolate between datapoints via correlation 
+                                    weightings of the datapoints that nicely handles things like uneven distribution of sample locations. Because of its usefulness and the many issues 
+                                    that may arise in sample location distribution, stationarity, isotropy, multivariate fitting, and so on, numerous forms of this exist to suit various 
+                                    needs. Be sure to look for a particular form that answers the particular question you're after. As a useful appendix, check:
+                                    <li>Simple kriging: Must know mean beforehand</li>
+                                    <li>Ordinary kriging: Data must be stationary, anisotropic</li>
+                                    <li>Block kriging: Lumps nearby points for large datasets</li>
+                                    <li>Universal kriging: Handles a lot of the cleaning of data first, maps to residuals</li>
+                                    <li>Nonlinear kriging: Can handle variation that's nonlinear in coordinate space</li>
+                                    <li>Multitype kriging: Can handle variations that are categorical as well as numerical</li>
+                                    <li>Multivariate kriging: Does exactly what it sounds like</li>
+                                </p>
+                                <h3>Tessellations</h3>
+                                <p style="text-align: left;">
+                                    While the minimum spanning tree may be more akin to previous work in clustering, it can give a sense of how data may be distributed relative to certain 
+                                    seed points of interest. Potentially more useful, however, are regions that are closest to the seed points, which go by a variety of names including 
+                                    Dirichlet, Voronoi, and Thiessen tessellations. While they can be produced via minimum spanning tree, I've found the buffer method most useful, wherein 
+                                    an annulus is measured from each point and the radii at which the annuli intersect become the edges of each region, as this tends to avoid nondeterministic 
+                                    results. While there are applications for this, particularly in clustering, an interesting historical application was the discovery that cholera was a 
+                                    waterborne disease when it was found that infections in London mapped to regions defined by their nearest watermain. 
+                                </p>
+                                
+                                <h3>Useful R libraries and functions</h3>
+                                <li>bubble(): Create bubble plots that allow data to be viewed in three dimensions</li>
+                                <li>gstat library: Contains a variety of functions for kriging and variogram creation</li>
+                                <li>variogram(): Creates a plottable variogram with the y axis being semivariance and the x axis being distance</li>
+                                <li>expand.grid(): Not directly related to kriging, but creates a grid of points out of two sequences to define the axes</li>
+                                <li>krige(): Creates an plottable ordinary kriging model for a grid of points using provided data, but assumes the data to be appopriate</li>
+                                <li>deldir(): Produces tiles for a tessellation</li>
+                                <li>tile.list(): Takes tiles produced by deldir and creates a plottable object from them</li>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
