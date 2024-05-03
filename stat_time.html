@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Time series analysis</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body id="top">
+
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">Analyzing periodicity, time varying behavior</a></h1>
+				<nav id="nav">
+					<ul>
+                        <nav id="nav">
+                            <ul>
+                                <li><a href="index.html" class="button special">Return home</a></li>
+                                <li><a href="astrostat.html" class="button special">Return to astrostat</a></li>
+                                
+                            </ul>
+                        </nav>
+					</ul>
+				</nav>
+			</header>
+			</section>
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Time series analysis</h2>
+                    <p>Analyzing periods, periodicity, and handling aperiodic measurements</p>
+				</header>
+				<div class="container">
+							<section class="special">
+                                <h3>Periodicity is the name of the game</h3>
+                                <p style="text-align: left;">
+                                    While focused on time series analysis, keep in mind that most of what's covered here could easily be applied to other forms of periodic 
+                                    data so long as we're looking at a periodic behavior in one variable in relation to another. Addressing periods that change in time presents 
+                                    its own separate issue as well. Finally, keep in mind that while methods for deriving the period observed in evenly spaced data points is well 
+                                    established via work on a variety of fronts, discerning periodicity in aperiodic observations is difficult and ultimately there's a need to 
+                                    observe for at least one full period to stand any real chance of getting a good fit.
+                                </p>
+                                <p style="text-align: left;">
+                                    This isn't to say that periodicity is the only thing that's worth looking into when doing time series analysis or attempting to understand how 
+                                    the phenomena data maps to changes in time. Simply, one of the quirks that's most particular to time series data, especially in astronomy, is 
+                                    finding periodic behavior. Note that, unlike in other fields of observational science, astronomy also has trouble with getting consistent, evenly 
+                                    spaced data when attempting to find periodicity, rendering a lot of the classic techniques in the field less useful.
+                                </p>
+                                <h3>Evenly spaced data</h3>
+                                <p style="text-align: left;">
+                                    While one could simply take a sine or cosine and attempt to fit it to their data (indeed, for some data this may be sufficient) the more general 
+                                    idea is to find <i>autocorrelation</i> in the data. That is, points in the data that inform on other points in the data downstream of them. A 
+                                    handy way to begin considering this is to think of how one would answer a question as to the price of milk. If one knew it was a particular price 
+                                    yesterday, they'd consider that fairly helpful, but then if they knew of weekly, monthly, or annual trends as well (milk is always more expensive 
+                                    on Tuesdays, even more so the second Tuesday of each month, and finally always the worst in March) then one would take that into account when 
+                                    answering. One would then consider developing a function that predicted the price of milk (or whatever) based on the sequence of prior data, all 
+                                    weighted in different ways. One could also consider limits of uncertainty in this approach, often driven by time, that would mean that many of 
+                                    the weights could be set to zero given that their contribution can't be certain above the level of random fluctuation. This gets into the concept 
+                                    of ACF and PACF functions, with the two differing primarily by the diminishing weighting of older data for PACF.
+                                </p>
+                                <p style="text-align: left;">
+                                    Given that so much science is done under this field of phenomena, however, there exist many, many ways of dealing with this that have to do with 
+                                    different ways of smoothing over issues in periods or aperiodicity in the periods, provided the data remains evenly spaced. ARIMA for instance 
+                                    can be useful for noisy periods due to how it averages out a lot of the issues. Wavelets and fourier transforms represent another method of 
+                                    analyzing these sorts of behavior via frequency-space representations, with applications well beyond simply hunting for a period. Periodograms 
+                                    represent another excellent tool that can tell us about complicated periodic behavior and even have forms that can be applied to unevenly spaced 
+                                    data.
+                                </p>
+                                <h3>Unevenly spaced measurement</h3>
+                                <p style="text-align: left;">
+                                    In an ideal world, one would always arrange for proper windows and sampling frequency such that one could simply fit a sine wave to the data and 
+                                    be done with it. The problems are, oftentimes the data contains a combination of periodic behavior that might make any such sine wave non-obvious 
+                                    both to the eye and one's algorithm of choice or one can't always get a constant, consistent observation window whether it's due to instrument 
+                                    availability, weather, object availability, or other miscellaneous factors. The latter end up relying on the techniques for unevenly spaced data 
+                                    analysis, which, though less refined than the techniques for evenly spaced data, do remain a strong set of tools with at times remarkable abilities.
+                                </p>
+                                <p style="text-align: left;">
+                                    If the data is sufficiently well behaved (the period is well defined and isn't hidden under several other periods) then the fairly simple 
+                                    minimum string-length statistic is quite useful. Operating on the principle that the shortest length of string that could connect all points 
+                                    is the one that follows the same period as the data, one can fairly quickly use standard regression techniques to hone in on a decent result. 
+                                    Alternatively, the Lomb-Scargle periodogram, though rarely quite as aesthetically clean as its more classical cousins, is highly effective in picking 
+                                    out periodic behaviors in most data sets so long as the measurements are reasonably distributed across periods. I have had issues with this picking 
+                                    out multiple periods in data with only one period, however, and similarly picking up only one period in data that's constructed of two periods. 
+                                    The exact reasons why are somewhat opaque and likely vary case to case, but expect it to behave best for well distributed data with many points to 
+                                    use for regressive analysis.
+                                </p>
+                                <h3>Useful R packages and libraries</h3>
+                                <li>tseries library: A library with a wide range of time series analysis functions</li>
+                                <li>lag.plot(): Constructs a lag plot of the data for a given number of lags, useful for finding correlations period to full analysis</li>
+                                <li>acf(), pacf(): Similar enough to not warrant separate lines, but do exactly what they say on the tin</li>
+                                <li>spec.pgram(): Creates a periodogram of the passed data, adjustable for spans</li>
+                                <li>arima(): Creates an ARIMA object that can be passed to predict [predict(arima_object, n.ahead = ##)] to project ARIMA models forward</li>
+                                <li>lomb::lsp(): Per the "::" this is part of the <i>lomb</i> library, but I have little practice with the wider library, though the lsp function 
+                                has proven quite useful for Lomb-Scargle periodograms</li>
+                                <li>I haven't found any good libraries for min-string methods, but I wrote my own functions and they're saved as min_string()</li>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
